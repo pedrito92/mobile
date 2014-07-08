@@ -3,7 +3,9 @@
 class UserHandler {
     function get($id) {
         $user = get_user($id);
-        var_dump($user);
+
+        API::status(200);
+        API::response($user);
     }
 
     function put($id){
@@ -14,5 +16,9 @@ class UserHandler {
         var_dump($_ENV);
 //        $username = $_POST["username"];
 //        update_user($id, $username);
+    }
+
+    function delete($id){
+        delete_user($id);
     }
 }

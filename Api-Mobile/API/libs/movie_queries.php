@@ -8,27 +8,26 @@
 
 //Retourne un user avec le nombre de films like, vue...
 function get_movie($idFilm) {
-    $query = MySQL::getInstance()->prepare("SELECT u.*,COUNT(um.`like`),COUNT(um.dislike),COUNT(um.watch),COUNT(um.watchlist)
-                                            FROM users AS u
-                                            LEFT JOIN `user-movie` AS um ON u.id = um.idUser
-                                            WHERE u.id = :id");
+    $query = MySQL::getInstance()->prepare("SELECT * FROM movies WHERE id = :id");
     $query->bindValue(':id', $idFilm, PDO::PARAM_STR);
     $query->execute();
-    return $query->fetch(PDO::FETCH_ASSOC);
+    return array("meta" => array("code" => 200), "data"=> $query->fetch(PDO::FETCH_ASSOC));;
 }
 
 //Mise à jour d'un user
-function update_user($idUser,$username) {
-    $query = MySQL::getInstance()->prepare("UPDATE users SET username = :username WHERE id = :id");
-    $query->bindValue(':username', $username, PDO::PARAM_STR);
-    $query->bindValue(':id', $idUser, PDO::PARAM_INT);
+function update_movie($idFilm,$title,$cover,$genre) {
+    $query = MySQL::getInstance()->prepare("UPDATE movies SET title=:title,cover=:cover,genre=:genre WHERE id = :id");
+    $query->bindValue(':title', $title, PDO::PARAM_STR);
+    $query->bindValue(':cover', $cover, PDO::PARAM_STR);
+    $query->bindValue(':genre', $genre, PDO::PARAM_STR);
+    $query->bindValue(':id', $idFilm, PDO::PARAM_INT);
     $query->execute();
 }
 
 //Suppression d'un user
-function delete_user($idUser){
-    $query = MySQL::getInstance()->prepare("DELETE FROM users WHERE id = :id");
-    $query->bindValue(':id', $idUser, PDO::PARAM_INT);
+function delete_movie($idFilm){
+    $query = MySQL::getInstance()->prepare("DELETE FROM movies WHERE id = :id");
+    $query->bindValue(':id', $idFilm, PDO::PARAM_INT);
     $query->execute();
 }
 

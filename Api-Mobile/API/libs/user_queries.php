@@ -8,7 +8,7 @@
 
 //Retourne un user avec le nombre de films like, vue...
 function get_user($idUser) {
-    $query = MySQL::getInstance()->prepare("SELECT u.*,COUNT(um.`like`),COUNT(um.dislike),COUNT(um.watch),COUNT(um.watchlist)
+    $query = MySQL::getInstance()->prepare("SELECT u.*,COUNT(um.`like`) as `like`,COUNT(um.dislike) as dislike,COUNT(um.watch) as watch,COUNT(um.watchlist) as watchlist
                                             FROM users AS u
                                             LEFT JOIN `user-movie` AS um ON u.id = um.idUser
                                             WHERE u.id = :id");
@@ -39,6 +39,16 @@ function get_user_like($idUser){
     $query = MySQL::getInstance()->prepare("SELECT * FROM movies WHERE id in (SELECT idMovie FROM  `user-movie` WHERE idUser =:id AND `like` = TRUE )");
     $query->bindValue(':id', $idUser, PDO::PARAM_INT);
     $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function add_user_likes($idUser, $idFilm){
+    $db = MySQL::getInstance();
+    $query = $db->prepare("INSERT INTO `user-movie`(idUser, idMovie, `like`, dislike) VALUES (:idUser,:idFilm,true, false)");
+    $query->bindValue(':idUser', $idUser, PDO::PARAM_INT);
+    $query->bindValue(':idFilm', $idFilm, PDO::PARAM_INT);
+    $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
 //Affichage de la liste des dislikes du user
@@ -46,6 +56,7 @@ function get_user_dislike($idUser){
     $query = MySQL::getInstance()->prepare("SELECT * FROM movies WHERE id in (SELECT idMovie FROM `user-movie` WHERE idUser = :id AND dislike = true);");
     $query->bindValue(':id', $idUser, PDO::PARAM_INT);
     $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
 //liste des films qu'on a vu
@@ -53,6 +64,7 @@ function get_user_watch($idUser){
     $query = MySQL::getInstance()->prepare("SELECT * FROM movies WHERE id in (SELECT idMovie FROM `user-movie` WHERE idUser = :id AND watch = true);");
     $query->bindValue(':id', $idUser, PDO::PARAM_INT);
     $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
 //liste des films qu'on a pas vu
@@ -60,6 +72,7 @@ function get_user_watchlist($idUser){
     $query = MySQL::getInstance()->prepare("SELECT * FROM movies WHERE id in (SELECT idMovie FROM `user-movie` WHERE idUser = :id AND watchlist = true);");
     $query->bindValue(':id', $idUser, PDO::PARAM_INT);
     $query->execute();
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
 ?>

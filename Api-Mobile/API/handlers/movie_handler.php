@@ -7,8 +7,11 @@
  */
 
 class MovieHandler {
-    function get(){
+    function get($id){
+        $movie = get_movie($id);
 
+        API::status(200);
+        API::response($movie);
     }
     function post(){
 

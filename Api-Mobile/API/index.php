@@ -3,6 +3,7 @@
 
 //Redirection des classes
 require("libs/Toro.php");
+require("libs/api.php");
 
 //Connection à la base de données
 require("libs/mysql.php");

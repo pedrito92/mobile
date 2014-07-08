@@ -9,20 +9,17 @@
 class MoviesHandler {
     function get(){
         $movies = get_movies();
-        var_dump($movies);
 
-        $movies = json_encode($movies);
-        $data = "{'data': $movies}";
-        $data = json_encode($data);
-
-        echo $data;
-        return $movies;
+        API::status(200);
+        API::response($movies);
     }
     function post(){
         $title = $_POST["title"];
         $cover = $_POST["cover"];
         $genre = $_POST["genre"];
         $valid = create_movie($title,$cover,$genre);
-        echo $valid;
+
+        API::status(200);
+        API::response($valid);
     }
 }
