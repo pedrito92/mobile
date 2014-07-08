@@ -1,3 +1,13 @@
+.idea
+/consigne.txt
+/cma-api
+/routes.txt
+/Api-Mobile/mysql-connector-java-5.1.22-bin.jar
+/Api-Mobile/mysql-connector-license.txt
+/Api-Mobile/routes_api.md
+/Api-Mobile/queries.sql
+/ToroPHP
+
 # Logs
 logs
 *.log
