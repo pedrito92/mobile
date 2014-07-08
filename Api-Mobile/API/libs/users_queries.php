@@ -3,7 +3,7 @@
 //Liste tous les users
 function get_users() {
     $query = MySQL::getInstance()->query("SELECT * FROM users");
-    return array("meta" => array("code" => 200), "data"=> $query->fetchAll(PDO::FETCH_ASSOC));
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
 //Création d'un user
@@ -14,7 +14,7 @@ function create_user($username) {
     $query->execute();
 
     $lastId = $db->lastInsertId();
-    return array("meta" => array("code" => 200), "data"=> array( "insertId" =>$lastId, "username" => $username));
+    return array( "insertId" =>$lastId, "username" => $username);
 }
 
 

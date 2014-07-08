@@ -42,28 +42,31 @@ ToroHook::add("404", function() {
 });
 
 Toro::serve(array(
-    "/" => "UsersHandler",
+    "/"                                 => "UsersHandler",
 
     //creation de user
-    "/users" => "UsersHandler",
+    "/users"                            => "UsersHandler",              //GET, POST fait
 
     //affichage d'un user
-    "/users/:number" => "UserHandler",
-    "/users/:number/likes" => "UserLikesHandler",
-    "/users/:number/likes/:number" => "UserLikesHandler",
-    "/users/:number/dislikes" => "UserDislikesHandler",
-    "/users/:number/dislikes/:number" => "UserDislikesHandler",
-    "/users/:number/watched" => "UserWatchedHandler",
-    "/users/:number/watched/:number" => "UserWatchedHandler",
-    "/users/:number/watchlist" => "UserWatchlistHandler",
-    "/users/:number/watchlist/:number" => "UserWatchlistHandler",
+    "/users/:number"                    => "UserHandler",               //GET, POST, DELETE fait -  PUT à faire
+    "/users/:number/likes"              => "UserLikesHandler",          //GET fait
+    "/users/:number/likes/:number"      => "UserLikesHandler",          //POST, DELETE à faire
+    "/users/:number/dislikes"           => "UserDislikesHandler",       //GET à faire
+    "/users/:number/dislikes/:number"   => "UserDislikesHandler",       //POST, DELETE à faire
+    "/users/:number/watched"            => "UserWatchedHandler",        //GET à faire
+    "/users/:number/watched/:number"    => "UserWatchedHandler",        //POST, DELETE à faire
+    "/users/:number/watchlist"          => "UserWatchlistHandler",      //GET à faire
+    "/users/:number/watchlist/:number"  => "UserWatchlistHandler",      //POST, DELETE à faire
 
-    "/movies" => "MoviesHandler",
-    "/movies/:number" => "MoviesHandler"
+    "/users/:number/followed/"          => "FollowedHandler",           //GET à faire
+    "/users/:number/followed/:number"   => "FollowedHandler",           //POST, DELETE à faire
+
+    "/users/:number/followers/"         => "FollowersHandler",          //GET à faire
+
+    "/movies"                           => "MoviesHandler",             //GET, POST fait
+    "/movies/:number"                   => "MoviesHandler",             //GET, POST, DELETE fait -  PUT à faire
+
+    "/search"                           => "SearchHandler",             //GET à faire
+
+    "/genres"                           => "GenreHandler"               //GET à faire
 ));
-
-
-//,
-//"/users/:number" => "UserHandler",
-//    "/movies" => "MoviesHandler",
-//    "/movies/:number" => "MoviesHandler"
