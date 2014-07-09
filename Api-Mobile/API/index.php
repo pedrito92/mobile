@@ -56,7 +56,7 @@ Toro::serve(array(
     "/users"                            => "UsersHandler",              //GET, POST fait
 
     //affichage d'un user
-    "/users/:number"                    => "UserHandler",               //GET, DELETE fait -  PUT à faire
+    "/users/:number"                    => "UserHandler",               //GET, PUT, DELETE fait
     "/users/:number/likes"              => "UserLikesHandler",          //GET fait
     "/users/:number/likes/:number"      => "UserLikesHandler",          //POST - DELETE fait
     "/users/:number/dislikes"           => "UserDislikesHandler",       //GET fait
@@ -72,7 +72,7 @@ Toro::serve(array(
     "/users/:number/followers/"         => "FollowersHandler",          //GET fait
 
     "/movies"                           => "MoviesHandler",             //GET, POST fait
-    "/movies/:number"                   => "MovieHandler",              //GET, DELETE fait -  PUT à faire
+    "/movies/:number"                   => "MovieHandler",              //GET, PUT, DELETE fait
 
     "/search"                           => "SearchHandler",             //GET fait
 
