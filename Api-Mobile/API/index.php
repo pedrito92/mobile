@@ -16,6 +16,10 @@ require("libs/user_queries.php");
 require("libs/movies_queries.php");
 //Requete sur un film
 require("libs/movie_queries.php");
+//Requete sur les genres
+require("libs/genre_queries.php");
+//Requete de la recherche
+require("libs/search_queries.php");
 
 
 //Requete sur les users
@@ -36,6 +40,10 @@ require("handlers/userdislikes_handler.php");
 require("handlers/userwatched_handler.php");
 //classes sur un film
 require("handlers/userwatchlist_handler.php");
+//Classes sur les genres
+require("handlers/genre_handler.php");
+//Classes recherche
+require("handlers/search_handler.php");
 
 ToroHook::add("404", function() {
     echo "Not found";
@@ -48,25 +56,25 @@ Toro::serve(array(
     "/users"                            => "UsersHandler",              //GET, POST fait
 
     //affichage d'un user
-    "/users/:number"                    => "UserHandler",               //GET, POST, DELETE fait -  PUT à faire
+    "/users/:number"                    => "UserHandler",               //GET, DELETE fait -  PUT à faire
     "/users/:number/likes"              => "UserLikesHandler",          //GET fait
-    "/users/:number/likes/:number"      => "UserLikesHandler",          //POST, DELETE à faire
-    "/users/:number/dislikes"           => "UserDislikesHandler",       //GET à faire
-    "/users/:number/dislikes/:number"   => "UserDislikesHandler",       //POST, DELETE à faire
-    "/users/:number/watched"            => "UserWatchedHandler",        //GET à faire
-    "/users/:number/watched/:number"    => "UserWatchedHandler",        //POST, DELETE à faire
-    "/users/:number/watchlist"          => "UserWatchlistHandler",      //GET à faire
-    "/users/:number/watchlist/:number"  => "UserWatchlistHandler",      //POST, DELETE à faire
+    "/users/:number/likes/:number"      => "UserLikesHandler",          //POST - DELETE fait
+    "/users/:number/dislikes"           => "UserDislikesHandler",       //GET fait
+    "/users/:number/dislikes/:number"   => "UserDislikesHandler",       //POST - DELETE fait
+    "/users/:number/watched"            => "UserWatchedHandler",        //GET fait
+    "/users/:number/watched/:number"    => "UserWatchedHandler",        //POST - DELETE fait
+    "/users/:number/watchlist"          => "UserWatchlistHandler",      //GET fait
+    "/users/:number/watchlist/:number"  => "UserWatchlistHandler",      //POST - DELETE fait
 
-    "/users/:number/followed/"          => "FollowedHandler",           //GET à faire
-    "/users/:number/followed/:number"   => "FollowedHandler",           //POST, DELETE à faire
+    "/users/:number/followed/"          => "FollowedHandler",           //GET fait
+    "/users/:number/followed/:number"   => "FollowedHandler",           //POST, DELETE fait
 
-    "/users/:number/followers/"         => "FollowersHandler",          //GET à faire
+    "/users/:number/followers/"         => "FollowersHandler",          //GET fait
 
     "/movies"                           => "MoviesHandler",             //GET, POST fait
-    "/movies/:number"                   => "MoviesHandler",             //GET, POST, DELETE fait -  PUT à faire
+    "/movies/:number"                   => "MovieHandler",              //GET, DELETE fait -  PUT à faire
 
-    "/search"                           => "SearchHandler",             //GET à faire
+    "/search"                           => "SearchHandler",             //GET fait
 
-    "/genres"                           => "GenreHandler"               //GET à faire
+    "/genres"                           => "GenreHandler"               //GET fait
 ));

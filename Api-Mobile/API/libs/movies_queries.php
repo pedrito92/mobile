@@ -9,7 +9,7 @@
 //Liste tous les users
 function get_movies() {
     $query = MySQL::getInstance()->query("SELECT * FROM movies");
-    return array("meta" => array("code" => 200), "data"=> $query->fetchAll(PDO::FETCH_ASSOC));;
+    return $query->fetchAll(PDO::FETCH_ASSOC);
 }
 
 //Création d'un user
@@ -22,7 +22,7 @@ function create_movie($title, $cover, $genre) {
     $query->execute();
 
     $lastId = $db->lastInsertId();
-    return array("data"=> array( "insertId" =>$lastId, "title" => $title, "cover" => $cover, "genre" => $genre));
+    return array( "insertId" =>$lastId, "title" => $title, "cover" => $cover, "genre" => $genre);
 }
 
 ?>

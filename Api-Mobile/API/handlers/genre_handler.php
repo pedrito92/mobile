@@ -8,6 +8,9 @@
 
 class GenreHandler {
     function get(){
-    
+        $genre = get_genres();
+
+        API::status(200);
+        API::response($genre);
     }
 }

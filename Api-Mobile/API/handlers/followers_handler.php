@@ -7,7 +7,11 @@
  */
 
 class FollowersHandler {
-    function get(){
-    
+    //Renvoie la liste de tous les utilisateurs suivit par user
+    function get($idUser){
+        $followers = get_followed($idUser);
+
+        API::status(200);
+        API::response($followers);
     }
 }

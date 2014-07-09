@@ -11,7 +11,7 @@ function get_movie($idFilm) {
     $query = MySQL::getInstance()->prepare("SELECT * FROM movies WHERE id = :id");
     $query->bindValue(':id', $idFilm, PDO::PARAM_STR);
     $query->execute();
-    return array("meta" => array("code" => 200), "data"=> $query->fetch(PDO::FETCH_ASSOC));;
+    return $query->fetch(PDO::FETCH_ASSOC);
 }
 
 //Mise à jour d'un user
@@ -26,7 +26,8 @@ function update_movie($idFilm,$title,$cover,$genre) {
 
 //Suppression d'un user
 function delete_movie($idFilm){
-    $query = MySQL::getInstance()->prepare("DELETE FROM movies WHERE id = :id");
+    $query = MySQL::getInstance()->prepare("DELETE FROM movies WHERE id = :id;
+                                            DELETE FROM usermovie WHERE idMovie = :id");
     $query->bindValue(':id', $idFilm, PDO::PARAM_INT);
     $query->execute();
 }

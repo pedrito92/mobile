@@ -9,11 +9,12 @@ class UserHandler {
     }
 
     function put($id){
-        var_dump($id);
-        var_dump($_GET);
-        var_dump($_POST);
-        var_dump($_REQUEST);
-        var_dump($_ENV);
+        $putData = file_get_contents("php://input");
+        var_dump($putData);
+//        var_dump($id);
+//        parse_str(file_get_contents("php://input"),$data);
+//        var_dump($data);
+//        echo $data["username"];
 //        $username = $_POST["username"];
 //        update_user($id, $username);
     }

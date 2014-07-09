@@ -8,6 +8,11 @@
 
 class SearchHandler {
     function get(){
-    
+        $search = $_GET["q"];
+        $type = $_GET["type"];
+        $result = search($search, $type);
+
+        API::status(200);
+        API::response($result);
     }
 }
