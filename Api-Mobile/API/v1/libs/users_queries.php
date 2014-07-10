@@ -14,7 +14,7 @@ function create_user($username) {
     $query->execute();
 
     $lastId = $db->lastInsertId();
-    return array( "insertId" =>$lastId, "username" => $username);
+    return array( "id" =>$lastId, "username" => $username);
 }
 
 

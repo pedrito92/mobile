@@ -8,7 +8,7 @@ class API{
 	}
 
 	static function response($response){
-		echo json_encode(array("meta" => array("code" => 200, "error" => "succed"), "data" => $response));
+		echo json_encode(array("meta" => array("code" => 200, "error" => "succed"), "data" => $response), JSON_NUMERIC_CHECK);
 	}
 
     static function error($code, $error){

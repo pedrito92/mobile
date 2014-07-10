@@ -8,7 +8,7 @@
 
 //Retourne un user avec le nombre de films like, vue...
 function get_user($idUser) {
-    $query = MySQL::getInstance()->prepare("SELECT u.*,COUNT(um.likes) as likes,COUNT(um.dislike) as dislike,COUNT(um.watch) as watch,COUNT(um.watchlist) as watchlist
+    $query = MySQL::getInstance()->prepare("SELECT u.*,COALESCE(SUM(um.likes),0) as likes,COALESCE(SUM(um.dislike),0) as dislikes,COALESCE(SUM(um.watch),0) as watched,COALESCE(SUM(um.watchlist),0) as watchlist
                                             FROM users AS u
                                             LEFT JOIN usermovie AS um ON u.id = um.idUser
                                             WHERE u.id = :id");
