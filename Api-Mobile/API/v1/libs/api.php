@@ -10,4 +10,16 @@ class API{
 	static function response($response){
 		echo json_encode(array("meta" => array("code" => 200, "error" => "succed"), "data" => $response));
 	}
+
+    static function error($code, $error){
+        API::status($code);
+        $json = array(
+            'meta'=>array(
+                'code'=>$code,
+                'error'=>$error
+            )
+        );
+
+        print json_encode($json);
+    }
 }

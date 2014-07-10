@@ -11,7 +11,10 @@ function get_movie($idFilm) {
     $query = MySQL::getInstance()->prepare("SELECT * FROM movies WHERE id = :id");
     $query->bindValue(':id', $idFilm, PDO::PARAM_STR);
     $query->execute();
-    return $query->fetch(PDO::FETCH_ASSOC);
+    $movie = $query->fetch(PDO::FETCH_ASSOC);
+
+    if(isset($movie["id"])) return $movie;
+    else return false;
 }
 
 //Mise à jour d'un user

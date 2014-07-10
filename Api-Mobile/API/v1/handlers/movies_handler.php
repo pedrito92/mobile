@@ -10,16 +10,30 @@ class MoviesHandler {
     function get(){
         $movies = get_movies();
 
-        API::status(200);
-        API::response($movies);
+        if(count($movies)>0){
+            API::status(200);
+            API::response($movies);
+        }else{
+            API::error(204, "Aucun user enregistré");
+        }
     }
     function post(){
-        $title = $_POST["title"];
-        $cover = $_POST["cover"];
-        $genre = $_POST["genre"];
-        $valid = create_movie($title,$cover,$genre);
+        if((isset($_POST["title"]) && $_POST["title"] != "") &&
+           (isset($_POST["cover"]) && $_POST["cover"] != "") &&
+           (isset($_POST["genre"]) && $_POST["genre"] != "")){
+            $title = $_POST["title"];
+            $cover = $_POST["cover"];
+            $genre = $_POST["genre"];
 
-        API::status(200);
-        API::response($valid);
+            $valid = create_movie($title,$cover,$genre);
+            if(count($valid)>0){
+                API::status(200);
+                API::response($valid);
+            }else{
+                    API::error(400, "Erreur à l'enregistrement");
+            }
+        }else{
+            API::error(400, "Aucune information à enregistrer");
+        }
     }
 }

@@ -6,7 +6,7 @@ require("v1/libs/Toro.php");
 require("v1/libs/api.php");
 
 //Connection à la base de données
-require("v1/v1/libs/mysql.php");
+require("v1/libs/mysql.php");
 
 //Requete sur les users
 require("v1/libs/users_queries.php");
@@ -20,10 +20,13 @@ require("v1/libs/movie_queries.php");
 require("v1/libs/genre_queries.php");
 //Requete de la recherche
 require("v1/libs/search_queries.php");
+//Requete de foolowed
+require("v1/libs/followed_queries.php");
+//Requete de follower
+require("v1/libs/followers_queries.php");
 
 
-//Requete sur les users
-//require("v1/libs/users_queries.php");
+
 //classes sur les users
 require("v1/handlers/users_handler.php");
 //classes sur les films
@@ -44,9 +47,13 @@ require("v1/handlers/userwatchlist_handler.php");
 require("v1/handlers/genre_handler.php");
 //Classes recherche
 require("v1/handlers/search_handler.php");
+//Classes followed
+require("v1/handlers/followed_handler.php");
+//Classes follower
+require("v1/handlers/followers_handler.php");
 
 ToroHook::add("404", function() {
-    echo "Not found";
+    API::error(404, "Erreur de requete");
 });
 
 Toro::serve(array(
@@ -66,10 +73,10 @@ Toro::serve(array(
     "/v1/users/:number/watchlist"          => "UserWatchlistHandler",      //GET fait
     "/v1/users/:number/watchlist/:number"  => "UserWatchlistHandler",      //POST - DELETE fait
 
-    "/v1/users/:number/followed/"          => "FollowedHandler",           //GET fait
+    "/v1/users/:number/followed"           => "FollowedHandler",           //GET fait
     "/v1/users/:number/followed/:number"   => "FollowedHandler",           //POST, DELETE fait
 
-    "/v1/users/:number/followers/"         => "FollowersHandler",          //GET fait
+    "/v1/users/:number/followers"          => "FollowersHandler",          //GET fait
 
     "/v1/movies"                           => "MoviesHandler",             //GET, POST fait
     "/v1/movies/:number"                   => "MovieHandler",              //GET, PUT, DELETE fait

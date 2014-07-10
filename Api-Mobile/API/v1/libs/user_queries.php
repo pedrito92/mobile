@@ -14,7 +14,10 @@ function get_user($idUser) {
                                             WHERE u.id = :id");
     $query->bindValue(':id', $idUser, PDO::PARAM_STR);
     $query->execute();
-    return $query->fetch(PDO::FETCH_ASSOC);
+    $user = $query->fetch(PDO::FETCH_ASSOC);
+
+    if(isset($user["id"])) return $user;
+    else return false;
 }
 
 //Mise à jour d'un user

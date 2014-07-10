@@ -9,7 +9,7 @@
 //Renvoie la liste de toutes les personnes que le user suit
 function get_followers($idUser){
     $query = MySQL::getInstance()->prepare("SELECT * FROM follow WHERE idUserFollower = :idUser");
-    $query->bindValue(":idUser", $idUser);
+    $query->bindValue(':idUser', $idUser, PDO::PARAM_STR);
     $query->execute();
     return $query->fetchAll(PDO::FETCH_ASSOC);
 }
